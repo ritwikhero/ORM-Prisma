@@ -31,4 +31,31 @@ function insertUser(username, password, firstName, lastName) {
         console.log(res);
     });
 }
-insertUser("ritwik@gmail.com", "1234567", "Ritwik", "Singh");
+function updateUser(username_1, _a) {
+    return __awaiter(this, arguments, void 0, function* (username, { firstName, lastName }) {
+        const res = yield prisma.user.update({
+            where: { username },
+            data: {
+                firstName,
+                lastName
+            }
+        });
+        console.log(res);
+    });
+}
+updateUser("ritwik@gmail.com", {
+    firstName: "ritwik1",
+    lastName: "Singh1"
+});
+function getUser(username) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const res = yield prisma.user.findUnique({
+            where: {
+                username
+            }
+        });
+        console.log("from get");
+        console.log(res);
+    });
+}
+getUser("ritwik@gmail.com");

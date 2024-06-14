@@ -22,4 +22,37 @@ async function insertUser(username: string, password: string, firstName: string,
   })
   console.log(res);
 }
-insertUser("ritwik@gmail.com","1234567","Ritwik","Singh");
+// insertUser("ritwik@gmail.com","1234567","Ritwik","Singh");
+
+interface updateParams {
+  firstName : string,
+  lastName : string
+}
+
+async function updateUser(username : string ,{
+  firstName , lastName} : updateParams){
+    const res = await prisma.user.update({
+      where : {username},
+      data : {
+        firstName,
+        lastName
+      }
+    });
+    console.log(res);
+  }
+  updateUser("ritwik@gmail.com" , {
+    firstName : "ritwik1",
+    lastName : "Singh1"
+  })
+
+  async function getUser(username : string){
+    const res = await prisma.user.findUnique({
+      where : {
+        username
+      }
+    });
+    console.log("from get");
+    console.log(res);
+  }
+
+  getUser("ritwik@gmail.com");
